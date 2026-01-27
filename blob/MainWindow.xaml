@@ -1,0 +1,26 @@
+﻿<Window x:Class="blob.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:blob"
+        mc:Ignorable="d"
+        Title="blob" Height="200" Width="150" Topmost="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+    <Window.Background>
+        <SolidColorBrush Opacity="0.0" Color="White"/>
+    </Window.Background>
+
+    <Grid>
+        <Image x:Name="blob" Source="images/basic/van.png" />
+        <ListView Opacity="0.0" Name="jobbKlikList" AllowDrop="True" Drop="Blob_Drop">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Ül" Click="UlClick"/>
+                    <MenuItem Header="Sétál" Click="SetalClick"/>
+                    <MenuItem Header="Táncol" Click="tancolClick"/>
+                    <MenuItem Header="EXIT" Click="exitClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+    </Grid>
+</Window>

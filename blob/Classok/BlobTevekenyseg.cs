@@ -1,0 +1,514 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Windows;
+using System.IO;
+using static blob.Classok.StaticBlobTextures;
+
+namespace blob.Classok
+{
+    public class BlobTevekenysegek
+    {
+
+        Random rnd = new Random();
+
+
+        int idleAM = 0;
+        public DispatcherTimer idleAnimation = new DispatcherTimer();
+
+        public DispatcherTimer blobBok = new DispatcherTimer();
+        public bool blobCsinalEValamit = false;
+
+
+        public DispatcherTimer blobTimer = new DispatcherTimer();
+        int blobTimerInt = 0;
+        merre blobErreMegy = merre.balra;
+        int meddigMegyBlobStart = 0;
+        int meddigMegyBlob = 0;
+
+
+        public DispatcherTimer blobSetal = new DispatcherTimer();
+
+        System.Windows.Rect workingArea = SystemParameters.WorkArea;
+        int blobBokInt = 0;
+
+        public DispatcherTimer blobEszik = new DispatcherTimer();
+        public int blobEszikInt = 0;
+
+
+        public DispatcherTimer blobViszik = new DispatcherTimer();
+        public int blobotViszikInt = 0;
+
+        public DispatcherTimer blobSzarik = new DispatcherTimer();
+        public int blobSzekletRaktar = 1;
+        public int blobSzarikInt = 0;
+        szardarab szarDarabPeldany;
+
+        public bool blobUl = false;
+
+
+        public int blobTolerancia = 0;
+        public bool elkaptaE = false;
+        public int szamlalo = 0;
+        public DispatcherTimer blobKovetiAzEgeret = new DispatcherTimer();
+
+        public DispatcherTimer egerLockIn = new DispatcherTimer();
+
+        [DllImport("user32.dll")]
+        static extern bool SetCursorPos(int X, int Y);
+
+
+
+
+        private MainWindow main;
+
+        public BlobTevekenysegek(MainWindow mainWindow) //konstruktor
+        {
+            main = mainWindow;
+
+
+
+            double maxLeft = workingArea.Width - main.Width;
+            double maxTop = workingArea.Height - main.Height;
+
+
+            //idleanimation
+
+            idleAnimation.Interval = TimeSpan.FromMilliseconds(500);
+            idleAnimation.Tick += IdleAnimation_Tick; ;
+            idleAnimation.Start();
+
+            //blobTimer
+            blobTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            blobTimer.Tick += BlobTimer_Tick;
+            blobTimer.Start();
+
+            //blobSetal
+            blobSetal.Interval = TimeSpan.FromMilliseconds(5);
+            blobSetal.Tick += BlobSetal_Tick;
+
+            //blobBök xd
+            blobBok.Interval = TimeSpan.FromMilliseconds(1);
+            blobBok.Tick += blobBok_Tick;
+
+            //blobEszik
+            blobEszik.Interval = TimeSpan.FromMilliseconds(20);
+            blobEszik.Tick += BlobEszik_Tick;
+
+            //blobViszik
+            blobViszik.Interval = TimeSpan.FromMilliseconds(20);
+            blobViszik.Tick += BlobViszik_Tick;
+
+            //blobSzarik
+            blobSzarik.Interval = TimeSpan.FromMilliseconds(1);
+            blobSzarik.Tick += BlobSzarik_Tick;
+
+
+            //blobKovetiAzEgeret
+            blobKovetiAzEgeret.Interval = TimeSpan.FromMilliseconds(1);
+            blobKovetiAzEgeret.Tick += BlobKovetiAzEgeret_Tick;
+
+            //blobEgerLockIn
+            egerLockIn.Interval = TimeSpan.FromMilliseconds(1);
+            egerLockIn.Tick += EgerLockIn_Tick;
+
+
+
+
+
+        }
+
+        private void EgerLockIn_Tick(object sender, EventArgs e)
+        {
+            SetCursorPos(Convert.ToInt32(main.Left + 75), Convert.ToInt32(main.Top + 100));
+        }
+
+        private void BlobKovetiAzEgeret_Tick(object sender, EventArgs e)
+        {
+            var pos = System.Windows.Forms.Cursor.Position;
+            if (elkaptaE == false)
+            {
+                if (blobTimer.IsEnabled) blobTimer.Stop();
+                if (blobEszik.IsEnabled) blobEszik.Stop();
+                if (blobBok.IsEnabled) blobBok.Stop();
+                if (blobSetal.IsEnabled) blobSetal.Stop();
+                if (idleAnimation.IsEnabled) idleAnimation.Stop();
+
+                blobCsinalEValamit = true;
+
+                meddigMegyBlobStart++;
+
+
+                if (main.Left + 75 >= pos.X)
+                {
+                    main.Left -= 10;
+                    if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal1.png")));
+                    else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal2.png")));
+                }
+                else
+                {
+                    main.Left += 10;
+                    if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal3.png")));
+                    else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal4.png")));
+
+                }
+                if (main.Top + 100 >= pos.Y)
+                {
+                    main.Top -= 10;
+                }
+                else main.Top += 10;
+            }
+            else
+            {
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/mosoly/mosoly1.png")));
+            }
+            szamlalo++;
+
+            if (szamlalo == 200)
+            {
+                //System.Windows.MessageBox.Show("asd");
+                idleAnimation.Start();
+                elkaptaE = false;
+                egerLockIn.Stop();
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                blobTimer.Start();
+                blobKovetiAzEgeret.Stop();
+            }
+
+        }
+
+        private void KezdSzarni()
+        {
+
+            if (blobTimer.IsEnabled) blobTimer.Stop();
+            if (blobEszik.IsEnabled) blobEszik.Stop();
+            if (blobBok.IsEnabled) blobBok.Stop();
+            if (blobSetal.IsEnabled) blobSetal.Stop();
+            if (idleAnimation.IsEnabled) idleAnimation.Stop();
+            if (blobKovetiAzEgeret.IsEnabled) blobKovetiAzEgeret.Stop();
+
+
+            blobCsinalEValamit = true;
+            main.blob.Source = new BitmapImage(new Uri(Pic("basic/blobSzarik.png")));
+
+            szarDarabPeldany = new szardarab();
+            szarDarabPeldany.Left = main.Left + 90;
+            szarDarabPeldany.Top = main.Top + 120;
+            szarDarabPeldany.Topmost = false;
+            szarDarabPeldany.Owner = null;
+            //main.Activate();
+            szarDarabPeldany.Show();
+            blobSzarik.Start();
+
+        }
+        private void BlobSzarik_Tick(object sender, EventArgs e)
+        {
+            szarDarabPeldany.Top += 1;
+
+            blobSzarikInt++;
+            if (blobSzarikInt == 50)
+            {
+                szarDarabPeldany.Topmost = true;
+                szarDarabPeldany.eldol();
+                blobCsinalEValamit = false;
+                blobSzarikInt = 0;
+                blobTimer.Start();
+                idleAnimation.Start();
+                blobSzarik.Stop();
+            }
+
+        }
+
+        private void BlobViszik_Tick(object sender, EventArgs e)
+        {
+            blobotViszikInt++;
+            if (blobTimer.IsEnabled) blobTimer.Stop();
+            if (blobEszik.IsEnabled) blobEszik.Stop();
+            if (blobBok.IsEnabled) blobBok.Stop();
+            if (blobSetal.IsEnabled) blobSetal.Stop();
+            if (idleAnimation.IsEnabled) idleAnimation.Stop();
+            if (blobKovetiAzEgeret.IsEnabled) blobKovetiAzEgeret.Stop();
+
+
+            var pos = System.Windows.Forms.Cursor.Position;
+            int x = pos.X;
+            int y = pos.Y;
+
+            if (blobotViszikInt % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/repul/repul1.png")));
+            else main.blob.Source = new BitmapImage(new Uri(Pic("basic/repul/repul2.png")));
+
+
+            main.Left = x - 70;
+            main.Top = y - 100;
+            if (blobotViszikInt >= 100)
+            {
+                blobotViszikInt = 0;
+            }
+
+
+        }
+
+        private void BlobEszik_Tick(object sender, EventArgs e)
+        {
+            blobCsinalEValamit = true;
+
+            if (blobSetal.IsEnabled) blobSetal.Stop();
+            if (idleAnimation.IsEnabled) idleAnimation.Stop();
+            if (blobBok.IsEnabled) blobBok.Stop();
+            if (blobKovetiAzEgeret.IsEnabled) blobKovetiAzEgeret.Stop();
+
+
+
+            if (blobEszikInt == 2) main.blob.Source = new BitmapImage(new Uri(Pic("basic/eszik/eszik1.png")));
+            if (blobEszikInt == 4) main.blob.Source = new BitmapImage(new Uri(Pic("basic/eszik/eszik2.png")));
+            if (blobEszikInt == 6) main.blob.Source = new BitmapImage(new Uri(Pic("basic/eszik/eszik3.png")));
+            if (blobEszikInt == 8) main.blob.Source = new BitmapImage(new Uri(Pic("basic/eszik/eszik4.png")));
+
+            if (blobEszikInt == 9)
+            {
+                blobCsinalEValamit = false;
+                blobEszikInt = 0;
+                idleAnimation.Start();
+                blobEszik.Stop();
+            }
+            blobEszikInt++;
+
+        }
+
+        private void BlobSetal_Tick(object sender, EventArgs e)
+        {
+            meddigMegyBlobStart++;
+            if (idleAnimation.IsEnabled) idleAnimation.Stop();
+            //if (blobTimer.IsEnabled) blobTimer.Stop();
+
+
+            double maxLeft = workingArea.Width - main.Width;
+            double maxTop = workingArea.Height - main.Height;
+
+            switch (blobErreMegy)
+            {
+                case merre.balra:
+                    main.Left -= 10;
+                    if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal1.png")));
+                    else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal2.png")));
+
+                    break;
+                case merre.jobbra:
+                    main.Left += 10;
+                    if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal3.png")));
+                    else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal4.png")));
+
+                    break;
+                case merre.fel:
+                    if (meddigMegyBlobStart >= meddigMegyBlobStart / 4)
+                    {
+
+                        if (meddigMegyBlobStart >= meddigMegyBlob - 2)
+                        {
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/ugrik/ugrik1.png")));
+                        }
+                        else
+                        {
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/ugrik/ugrik2.png")));
+                            main.Top -= 10;
+                        }
+                    }
+                    break;
+                case merre.le:
+                    if (meddigMegyBlobStart >= meddigMegyBlobStart / 4)
+                    {
+
+                        if (meddigMegyBlobStart >= meddigMegyBlob - 2)
+                        {
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik1.png")));
+                        }
+                        else
+                        {
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik2.png")));
+                            main.Top += 10;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            if (meddigMegyBlobStart >= meddigMegyBlob)
+            {
+                meddigMegyBlobStart = 0;
+                meddigMegyBlob = 0;
+                //blobTimer.Start();
+                idleAnimation.Start();
+                blobSetal.Stop();
+            }
+        }
+
+        private void BlobTimer_Tick(object sender, EventArgs e)
+        {
+            egerLockIn.Stop();
+            double maxLeft = workingArea.Width - main.Width;
+            double maxTop = workingArea.Height - main.Height;
+
+            int randomTevekenyseg = rnd.Next(7);
+            blobTimerInt++;
+
+
+
+
+            if (blobTimerInt == 2)
+            {
+                switch (randomTevekenyseg)
+                {
+                    case 0:
+                        if (!blobSetal.IsEnabled)//setal 
+                        {
+                            meddigMegyBlob = rnd.Next(20, 71);
+                            if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
+                            else blobErreMegy = merre.jobbra;
+                            blobSetal.Start();
+                        }
+                        break;
+                    case 1:
+                        if (!blobSetal.IsEnabled)//setal 2 hogy nagyon eselye legyen a sétára
+                        {
+                            meddigMegyBlob = rnd.Next(20, 71);
+                            if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
+                            else blobErreMegy = merre.jobbra;
+                            blobSetal.Start();
+                        }
+                        break;
+                    case 2:
+                        if (!blobSetal.IsEnabled)//ugrik
+                        {
+                            meddigMegyBlob = rnd.Next(30, 45);
+                            if (main.Top >= workingArea.Height / 2)
+                            {
+                                blobErreMegy = merre.fel;
+                            }
+                            else blobErreMegy = merre.le;
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/ugrik/ugrik1.png")));
+                            blobSetal.Start();
+                        }
+                        break;
+                    case 3: //szarik
+                        if (blobSzekletRaktar != 0)
+                        {
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/blobSzarik.png")));
+                            KezdSzarni();
+                            blobSzekletRaktar--;
+                        }
+                        break;
+                    case 4:
+                        buborek asd = new buborek("");
+                        asd.Left = main.Left - 250;
+                        asd.Top = main.Top - 100;
+                        asd.Show();
+
+                        break;
+                    case 5:
+                        if (!blobKovetiAzEgeret.IsEnabled)
+                        {
+                            szamlalo = 0;
+                            blobKovetiAzEgeret.Start();
+                        }
+
+                        break;
+                    case 6:
+                        string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                        string shortName = userName.Contains("\\") ? userName.Split('\\')[1] : userName;
+                        asd = new buborek("Hagytam neked valamit az asztalon:D");
+                        asd.Left = main.Left - 250;
+                        asd.Top = main.Top - 100;
+                        asd.Show();
+
+                        string[] uzenetek = {
+                            $"jó, bocsánat ha megijesztettelek {shortName}",
+                            $"szia {shortName}, igen tudom a pc neved",
+                            $"szia {shortName}",
+                            "igen, tudok txtbe is írni",
+                            "ja, txtbe is tudok írni",
+                            "hidd el, ennél többet is tudok haha",
+                            "oké, nem meglepő hogy ezt csinálom, de azért vicces, nem?",
+                            "jó nem váratlan fordulat hogy asztalra írok, de azért vicces, nem?",
+                            "ooké biztos nem lepődtél meg, de azért vicces, nem?",
+                            $"jó lehet nem te választottad, de miért az a neved hogy {shortName}?",
+
+                        };
+                        File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "//üzenet.txt", uzenetek[rnd.Next(uzenetek.Length - 1)]);
+
+                        break;
+                    default:
+                        break;
+                }
+                // ide tervezek valami random dolgot amit csinálni fog majd.
+            }
+            if (blobTimerInt == 4) blobTimerInt = 0;
+        }
+
+
+        private void blobBok_Tick(object sender, EventArgs e)
+        {
+            double maxLeft = workingArea.Width - main.Width;
+            double maxTop = workingArea.Height - main.Height;
+            /*
+            var pos =System.Windows.Forms.Cursor.Position;
+
+            if (blobTolerancia>=10)
+            {
+                if (rnd.Next(2) == 0)
+                {
+                    SetCursorPos(pos.X - 100, pos.Y);
+                }
+                else SetCursorPos(pos.X, pos.Y - 100);
+
+            }*/
+
+
+            if (!(main.Left + 10 >= maxLeft))
+            {
+                main.Left += 10;
+            }
+            else
+            {
+                if (!(main.Top + 10 >= maxTop))
+                {
+                    main.Top += 10;
+                }
+                else
+                {
+                    main.Top -= 10;
+                }
+
+            }
+            blobBokInt++;
+            if (blobBokInt == 10)
+            {
+                blobBokInt = 0;
+                blobBok.Stop();
+            }
+        }
+
+        private void IdleAnimation_Tick(object sender, EventArgs e)
+        {
+            if (idleAM == 0)
+            {
+                if (main.Left >= workingArea.Width / 2) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                else main.blob.Source = new BitmapImage(new Uri("pack://application:,,,/images/basic/van3.png"));
+                idleAM = 1;
+            }
+            else if (idleAM == 1)
+            {
+                if (main.Left >= workingArea.Width / 2) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van2.png")));
+                else main.blob.Source = new BitmapImage(new Uri(Pic("basic/van4.png")));
+                idleAM = 0;
+            }
+        }
+
+
+    }
+
+}
