@@ -62,10 +62,17 @@
     </ApplicationDefinition>
     <Compile Include="Classok\BlobTevekenyseg.cs" />
     <Compile Include="Classok\StaticBlobTextures.cs" />
+    <Compile Include="hand.xaml.cs">
+      <DependentUpon>hand.xaml</DependentUpon>
+    </Compile>
     <Compile Include="szardarab.xaml.cs">
       <DependentUpon>szardarab.xaml</DependentUpon>
     </Compile>
     <Page Include="buborek.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="hand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +166,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="blobIkon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\basic\kezek\middle-jobb.png" />
+    <Resource Include="images\basic\kezek\hand-bal.png" />
+    <Resource Include="images\basic\kezek\hand-jobb.png" />
+    <Resource Include="images\basic\kezek\handdown-bal.png" />
+    <Resource Include="images\basic\kezek\handdown-jobb.png" />
+    <Resource Include="images\basic\kezek\interlock.png" />
+    <Resource Include="images\basic\kezek\like-bal.png" />
+    <Resource Include="images\basic\kezek\like-jobb.png" />
+    <Resource Include="images\basic\kezek\middle-bal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

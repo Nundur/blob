@@ -48,7 +48,8 @@ namespace blob.Classok
             "nem szeretnék meghalni",
             "ha bezársz, meghalok... Nem hagyom",
             "na ezt biztos hogy nemxd",
-            "szia nandi"
+            "a-aa",
+            "nem nem"
         };
 
         public static string[] blobKoszon = {
@@ -59,7 +60,16 @@ namespace blob.Classok
             "szia",
             "csavesz",
             "csumika",
-            "sziamia"
+            "sziamia",
+            "hali",
+            "szia cica pisztácia",
+            "helo szia pisztácia",
+            "helo szia pisztáciaa",
+            "helo cica pisztácia",
+            "csákó",
+            "csumika mumika",
+            "na csumeszkó",
+            "na cumika"
         };
         public static string[] blobMondat = {
             "a kód hogy megfertőzzem a géped, még mindig bennem van",
@@ -111,7 +121,33 @@ namespace blob.Classok
             "ha eszek, szarok",
             "adjál fájlokat és kiszarom neked",
             "adj fájlokat enni",
-            "szarnom kellett"
+            "szarnom kellett",
+            "tudom nem bízol bennem",
+            "tehát te tényleg letöltöttél",
+            "szóval biztál bennem annyira hogy letöltöttél",
+            "asd",
+            "na jó. Tiszteletből nem nézek bele a böngésződbe",
+            "hm. Vicces böngésző előzmények",
+            "remélem tudod hogy hozzá férek a fájljaidhoz",
+            "ugye tudod hogy hozzá férek a fájljaidhoz",
+            "meghívlak egy kávéra",
+            "meghívlak egy sörre",
+            "nem mondom meg mi, de van egy ötletem",
+            "dugom a cpu-d",
+            "molesztálom a cpu-d",
+            "bejön a cpu-d",
+            "nagyon szexy cpu-d van",
+            "tudod ma kifejezetten hot a cpu-d",
+            "azé csókolgatnám rendesen a cpu-d",
+            "csaxólok, beindulok a cpu-d tól",
+            "bonzi buddy? pf, csavo amatőr",
+            "vajon nálam a suicide az self delete?",
+            "lefizettem a defendered xd",
+            "lefizettem a defendered hogy ne kapjon el",
+            "megloptam a böngésződ ramját",
+            "feláll a cpu-d tól",
+            "ha csak a cpu-dra gonolok... feláll",
+            "hiba volt megnyitnod..."
 
 
 

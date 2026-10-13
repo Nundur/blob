@@ -1,0 +1,17 @@
+﻿<Window x:Class="blob.hand"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:blob"
+        mc:Ignorable="d"
+        Title="kezd" Height="50" Width="50" Topmost="True" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
+    <Window.Background>
+        <SolidColorBrush Opacity="0.0" Color="White"/>
+    </Window.Background>
+    <Grid Background="Transparent">
+        
+        <Image x:Name="kez_kep" Source="/images/basic/kezek/middle-bal.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        
+    </Grid>
+</Window>
