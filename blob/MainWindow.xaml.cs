@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static blob.Classok.StaticBlobTextures;
+using static blob.Classok.BlobTevekenysegek;
 using blob.Classok;
 
 namespace blob
@@ -62,7 +63,8 @@ namespace blob
             }
             else
             {
-
+                blobTimers.StopAnimaciok();
+                Application.Current.Shutdown();
             }
         }
 
@@ -147,15 +149,6 @@ namespace blob
                 blobTimers.idleAnimation.Start();
             }
         }
-        private void SetalClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void tancolClick(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void exitClick(object sender, RoutedEventArgs e)
         {
             if (blobTimers.blobTolerancia >= 10)
@@ -164,7 +157,8 @@ namespace blob
             }
             else
             {
-                this.Close();
+                blobTimers.StopAnimaciok();
+                Application.Current.Shutdown();
             }
 
         }

@@ -11,13 +11,11 @@
     </Window.Background>
 
     <Grid>
-        <Image x:Name="blob" Source="images/basic/van.png" />
+        <Image x:Name="blob" Source="images/basic/van.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
         <ListView Opacity="0.0" Name="jobbKlikList" AllowDrop="True" Drop="Blob_Drop">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Ül" Click="UlClick"/>
-                    <MenuItem Header="Sétál" Click="SetalClick"/>
-                    <MenuItem Header="Táncol" Click="tancolClick"/>
                     <MenuItem Header="EXIT" Click="exitClick"/>
                 </ContextMenu>
             </ListView.ContextMenu>

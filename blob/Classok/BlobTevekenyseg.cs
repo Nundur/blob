@@ -45,7 +45,7 @@ namespace blob.Classok
         public int blobotViszikInt = 0;
 
         public DispatcherTimer blobSzarik = new DispatcherTimer();
-        public int blobSzekletRaktar = 1;
+        public int blobSzekletRaktar = new Random().Next(1, 5);
         public int blobSzarikInt = 0;
         szardarab szarDarabPeldany;
 
@@ -125,16 +125,16 @@ namespace blob.Classok
 
         }
 
-        private void StopAnimaciok(DispatcherTimer kivetel = null)
+        public void StopAnimaciok(DispatcherTimer[] kivetelek = null)
         {
-            if (blobTimer != kivetel)blobTimer.Stop();
-            if (blobEszik != kivetel)blobEszik.Stop();
-            if (blobBok != kivetel)blobBok.Stop();
-            if (blobSetal != kivetel)blobSetal.Stop();
-            if (idleAnimation != kivetel)idleAnimation.Stop();
-            if (blobKovetiAzEgeret != kivetel)blobKovetiAzEgeret.Stop();
-            if (blobViszik != kivetel) blobViszik.Stop();
-            if (blobSzarik != kivetel) blobSzarik.Stop();
+            if (!kivetelek.Contains(blobTimer))blobTimer.Stop();
+            if (!kivetelek.Contains(blobEszik))blobEszik.Stop();
+            if (!kivetelek.Contains(blobBok))blobBok.Stop();
+            if (!kivetelek.Contains(blobSetal))blobSetal.Stop();
+            if (!kivetelek.Contains(idleAnimation))idleAnimation.Stop();
+            if (!kivetelek.Contains(blobKovetiAzEgeret))blobKovetiAzEgeret.Stop();
+            if (!kivetelek.Contains(blobViszik)) blobViszik.Stop();
+            if (!kivetelek.Contains(blobSzarik)) blobSzarik.Stop();
         }
 
         private void EgerLockIn_Tick(object sender, EventArgs e)
@@ -147,27 +147,28 @@ namespace blob.Classok
             var pos = System.Windows.Forms.Cursor.Position;
             if (elkaptaE == false)
             {
-                
+                /*
                 if (blobTimer.IsEnabled) blobTimer.Stop();
                 if (blobEszik.IsEnabled) blobEszik.Stop();
                 if (blobBok.IsEnabled) blobBok.Stop();
                 if (blobSetal.IsEnabled) blobSetal.Stop();
                 if (idleAnimation.IsEnabled) idleAnimation.Stop();
-                
+                */
 
                 blobCsinalEValamit = true;
 
                 meddigMegyBlobStart++;
 
-
+                BitmapImage handBal = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
+                BitmapImage handJobb = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
                 if (main.Left + 75 >= pos.X)
                 {
                     if (elkaptaE == false)
                     {
                         try
                         {
-                            balKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
-                            jobbKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
+                            if (balKez.kez_kep.Source != handBal) balKez.kez_kep.Source = handBal;
+                            if (jobbKez.kez_kep.Source != handBal) jobbKez.kez_kep.Source = handBal;
                         }
                         catch (Exception)
                         {
@@ -183,8 +184,8 @@ namespace blob.Classok
                     {
                         try
                         {
-                            balKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/hand-jobb.png")));
-                            jobbKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/hand-jobb.png")));
+                            if (balKez.kez_kep.Source != handJobb) balKez.kez_kep.Source = handJobb;
+                            if (jobbKez.kez_kep.Source != handJobb) jobbKez.kez_kep.Source = handJobb;
                         }
                         catch (Exception)
                         {
@@ -216,13 +217,12 @@ namespace blob.Classok
 
             if (szamlalo == 200)
             {
-                //System.Windows.MessageBox.Show("asd");
                 idleAnimation.Start();
+                kezLevagas();
                 elkaptaE = false;
                 egerLockIn.Stop();
                 main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
                 blobTimer.Start();
-                kezLevagas();
                 blobKovetiAzEgeret.Stop();
             }
 
@@ -285,14 +285,18 @@ namespace blob.Classok
 
         private void BlobViszik_Tick(object sender, EventArgs e)
         {
+
             blobotViszikInt++;
+            kezLevagas();
+            StopAnimaciok(new[] { blobViszik });
+            /*
             if (blobTimer.IsEnabled) blobTimer.Stop();
             if (blobEszik.IsEnabled) blobEszik.Stop();
             if (blobBok.IsEnabled) blobBok.Stop();
             if (blobSetal.IsEnabled) blobSetal.Stop();
             if (idleAnimation.IsEnabled) idleAnimation.Stop();
             if (blobKovetiAzEgeret.IsEnabled) blobKovetiAzEgeret.Stop();
-
+            */
 
             var pos = System.Windows.Forms.Cursor.Position;
             int x = pos.X;
@@ -384,11 +388,11 @@ namespace blob.Classok
 
                         if (meddigMegyBlobStart >= meddigMegyBlob - 2)
                         {
-                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik1.png")));
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik2.png")));
                         }
                         else
                         {
-                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik2.png")));
+                            main.blob.Source = new BitmapImage(new Uri(Pic("basic/esik1.png")));
                             main.Top += 10;
                         }
                     }
@@ -427,8 +431,15 @@ namespace blob.Classok
                         if (!blobSetal.IsEnabled)//setal 
                         {
                             meddigMegyBlob = rnd.Next(20, 71);
-                            if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
+                            if (rnd.Next(0, 7)>=1) if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
                             else blobErreMegy = merre.jobbra;
+                            if (rnd.Next(0, 4) == 0)
+                            {
+                                balKez = new hand(rnd.Next(0, 2) == 0 ? "middle-bal" : "like-bal", 1, this.main, -5, 100);
+                                balKez.Left = main.Left - 5;
+                                balKez.Top = main.Top + 100;
+                                balKez.Show();
+                            }
                             blobSetal.Start();
                         }
                         break;
@@ -436,8 +447,15 @@ namespace blob.Classok
                         if (!blobSetal.IsEnabled)//setal 2 hogy nagyon eselye legyen a sétára
                         {
                             meddigMegyBlob = rnd.Next(20, 71);
-                            if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
+                            if (rnd.Next(0, 7) >= 1) if (main.Left >= workingArea.Width / 2) blobErreMegy = merre.balra;
                             else blobErreMegy = merre.jobbra;
+                            if (rnd.Next(0, 4) == 0)
+                            {
+                                balKez = new hand(rnd.Next(0, 2) == 0 ? "middle-bal" : "like-bal", 1, this.main, -5, 100);
+                                balKez.Left = main.Left - 5;
+                                balKez.Top = main.Top + 100;
+                                balKez.Show();
+                            }
                             blobSetal.Start();
                         }
                         break;
@@ -460,7 +478,7 @@ namespace blob.Classok
                             main.blob.Source = new BitmapImage(new Uri(Pic("basic/blobSzarik.png")));
                             KezdSzarni();
                             blobSzekletRaktar--;
-                            StopAnimaciok(blobSzarik);
+                            StopAnimaciok(new[] { blobSzarik } );
                         }
                         break;
                     case 4:
@@ -475,11 +493,16 @@ namespace blob.Classok
                         {
                             szamlalo = 0;
                             kezLevagas();
-                            balKez = new hand("hand-bal", -1, this.main, -75, 120);
+                            //--kez
+                            if (blobErreMegy == merre.balra) balKez = new hand("hand-bal", -1, this.main, -75, 120);
+                            else balKez = balKez = new hand("hand-jobb", -1, this.main, -75, 120);
                             balKez.Show();
-                            jobbKez = new hand("hand-bal", -1, this.main, 0, 115);
+                            if (blobErreMegy == merre.balra) jobbKez = new hand("hand-bal", -1, this.main, 0, 115);
+                            else balKez = new hand("hand-jobb", -1, this.main, -75, 120);
                             jobbKez.Show();
+                            //--kez
                             blobKovetiAzEgeret.Start();
+                            StopAnimaciok(new[] { blobKovetiAzEgeret });
                         }
 
                         break;
@@ -522,28 +545,28 @@ namespace blob.Classok
                             "ooké biztos nem lepődtél meg, de azért vicces, nem?",
                             $"jó lehet nem te választottad, de miért az a neved hogy {shortName}?",
                             "szóval biztál bennem annyira hogy letöltöttél",
-            "na jó. Tiszteletből nem nézek bele a böngésződbe",
-            "hm. Vicces böngésző előzmények",
-            "remélem tudod hogy hozzá férek a fájljaidhoz",
-            "ugye tudod hogy hozzá férek a fájljaidhoz",
-            "meghívlak egy kávéra",
-            "meghívlak egy sörre",
-            "nem mondom meg mi, de van egy ötletem",
-            "dugom a cpu-d",
-            "molesztálom a cpu-d",
-            "bejön a cpu-d",
-            "nagyon szexy cpu-d van",
-            "tudod ma kifejezetten hot a cpu-d",
-            "azé csókolgatnám rendesen a cpu-d",
-            "csaxólok, beindulok a cpu-d tól",
-            "bonzi buddy? pf, csavo amatőr",
-            "vajon nálam a suicide az self delete?",
-            "lefizettem a defendered xd",
-            "lefizettem a defendered hogy ne kapjon el",
-            "megloptam a böngésződ ramját",
-            "feláll a cpu-d tól",
-            "ha csak a cpu-dra gonolok... feláll",
-            "hiba volt megnyitnod..."
+                            "na jó. Tiszteletből nem nézek bele a böngésződbe",
+                            "hm. Vicces böngésző előzmények",
+                            "remélem tudod hogy hozzá férek a fájljaidhoz",
+                            "ugye tudod hogy hozzá férek a fájljaidhoz",
+                            "meghívlak egy kávéra",
+                            "meghívlak egy sörre",
+                            "nem mondom meg mi, de van egy ötletem",
+                            "dugom a cpu-d",
+                            "molesztálom a cpu-d",
+                            "bejön a cpu-d",
+                            "nagyon szexy cpu-d van",
+                            "tudod ma kifejezetten hot a cpu-d",
+                            "azé csókolgatnám rendesen a cpu-d",
+                            "csaxólok, beindulok a cpu-d tól",
+                            "bonzi buddy? pf, csavo amatőr",
+                            "vajon nálam a suicide az self delete?",
+                            "lefizettem a defendered xd",
+                            "lefizettem a defendered hogy ne kapjon el",
+                            "megloptam a böngésződ ramját",
+                            "feláll a cpu-d tól",
+                            "ha csak a cpu-dra gonolok... feláll",
+                            "hiba volt megnyitnod..."
 
                         };
                         File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "//üzenet.txt", uzenetek[rnd.Next(uzenetek.Length - 1)]);
@@ -552,21 +575,12 @@ namespace blob.Classok
                     case 7: //kézzel bemutat :
 
                         
-                        balKez = new hand("middle-bal", 1, this.main, -5, 100);
+                        balKez = new hand( rnd.Next(0, 2) ==0 ?  "middle-bal" : "like-bal", 1, this.main, -5, 100);
                         balKez.Left = main.Left-5;
-                        
                         balKez.Top = main.Top + 100;
-                        
                         balKez.Show();
-                        
-
-
-
-
 
                         break;
-
-
                     default:
                         break;
                 }
@@ -622,13 +636,14 @@ namespace blob.Classok
         {
             if (idleAM == 0)
             {
-                if (main.Left >= workingArea.Width / 2) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                //if (main.Left >= workingArea.Width / 2)
+                if (blobErreMegy == merre.balra) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
                 else main.blob.Source = new BitmapImage(new Uri("pack://application:,,,/images/basic/van3.png"));
                 idleAM = 1;
             }
             else if (idleAM == 1)
             {
-                if (main.Left >= workingArea.Width / 2) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van2.png")));
+                if (blobErreMegy == merre.balra) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van2.png")));
                 else main.blob.Source = new BitmapImage(new Uri(Pic("basic/van4.png")));
                 idleAM = 0;
             }

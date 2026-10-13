@@ -8,14 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/bal-jobb.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/hand-bal.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/hand-jobb.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/handdown-bal.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/handdown-jobb.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/interlock.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/like-bal.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/like-jobb.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/middle-bal.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/okol-bal.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/okol-jobb.png")]
 
 
