@@ -44,9 +44,6 @@ namespace blob
             InitializeComponent();
             this.Closing += blobBezarul;
             this.MouseLeave += MainWindow_MouseLeave;
-
-
-
         }
 
         private void MainWindow_MouseLeave(object sender, MouseEventArgs e)
@@ -63,8 +60,9 @@ namespace blob
             }
             else
             {
-                blobTimers.StopAnimaciok();
-                Application.Current.Shutdown();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                //blobTimers.StopAnimaciok();
+                //Application.Current.Shutdown();
             }
         }
 
@@ -109,10 +107,6 @@ namespace blob
                 }
             }
         }
-
-
-
-
 
         private void Blob_Drop(object sender, DragEventArgs e)
         {

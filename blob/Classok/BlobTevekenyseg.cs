@@ -59,6 +59,9 @@ namespace blob.Classok
 
         public DispatcherTimer egerLockIn = new DispatcherTimer();
 
+
+        public DispatcherTimer blobEldobjaAzEgeret = new DispatcherTimer();
+
         [DllImport("user32.dll")]
         static extern bool SetCursorPos(int X, int Y);
 
@@ -119,22 +122,85 @@ namespace blob.Classok
             egerLockIn.Interval = TimeSpan.FromMilliseconds(1);
             egerLockIn.Tick += EgerLockIn_Tick;
 
-
+            //blobEldobjaAzEgeret
+            blobEldobjaAzEgeret.Interval = TimeSpan.FromMilliseconds(1);
+            blobEldobjaAzEgeret.Tick += BlobEldobjaAzEgeret_Tick;
 
 
 
         }
 
+        public int blobDobAnimation = 0;
+        public int szamlaloKetto = 0;
+
+        private void BlobEldobjaAzEgeret_Tick(object sender, EventArgs e)
+        {
+            szamlalo++;
+
+            // 1. Fázis: Induláskor (szamlalo == 1)
+            if (szamlalo == 1)
+            {
+
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott.png")));
+                blobDobAnimation = 1;
+                kezLevagas();
+                balKez = new hand("mutat-bal", -1, this.main, 25, 95);
+                jobbKez = new hand("okol-bal", -1, this.main, -120, 47);
+                balKez.Show();
+                jobbKez.Show();
+            }
+            if(szamlalo >= 1 && szamlalo < 70) SetCursorPos(Convert.ToInt32(main.Left +122), Convert.ToInt32(main.Top + 47));
+            // 2. Fázis: Bizonyos idő elteltével (pl. 150 tick / vagy ha stopperrel nézed)
+            else if (szamlalo == 70) // vagy amennyi tick a várakozási időd
+            {
+                blobDobAnimation = 2;
+                kezLevagas();
+                balKez = new hand("hand-bal", -1, this.main, 22, 40);
+                jobbKez = new hand("handdown-bal", -1, this.main, -100, 110);
+                balKez.Show();
+                jobbKez.Show();
+            }
+            if (szamlalo>= 70)
+            {
+                szamlaloKetto+=45;
+                var pos = System.Windows.Forms.Cursor.Position;
+                SetCursorPos(Convert.ToInt32(main.Left + 22-szamlaloKetto), Convert.ToInt32(main.Top + 40));
+            }
+            if (szamlalo == 120)
+            {
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                blobEldobjaAzEgeret.Stop();
+                kezLevagas();
+                idleAnimation.Start();
+                blobTimer.Start();
+                //Environment.Exit(0);
+            }
+        }
         public void StopAnimaciok(DispatcherTimer[] kivetelek = null)
         {
-            if (!kivetelek.Contains(blobTimer))blobTimer.Stop();
-            if (!kivetelek.Contains(blobEszik))blobEszik.Stop();
-            if (!kivetelek.Contains(blobBok))blobBok.Stop();
-            if (!kivetelek.Contains(blobSetal))blobSetal.Stop();
-            if (!kivetelek.Contains(idleAnimation))idleAnimation.Stop();
-            if (!kivetelek.Contains(blobKovetiAzEgeret))blobKovetiAzEgeret.Stop();
-            if (!kivetelek.Contains(blobViszik)) blobViszik.Stop();
-            if (!kivetelek.Contains(blobSzarik)) blobSzarik.Stop();
+            if (kivetelek != null)
+            {
+                if (!kivetelek.Contains(blobTimer)) blobTimer.Stop();
+                if (!kivetelek.Contains(blobEszik)) blobEszik.Stop();
+                if (!kivetelek.Contains(blobBok)) blobBok.Stop();
+                if (!kivetelek.Contains(blobSetal)) blobSetal.Stop();
+                if (!kivetelek.Contains(idleAnimation)) idleAnimation.Stop();
+                if (!kivetelek.Contains(blobKovetiAzEgeret)) blobKovetiAzEgeret.Stop();
+                if (!kivetelek.Contains(blobViszik)) blobViszik.Stop();
+                if (!kivetelek.Contains(blobSzarik)) blobSzarik.Stop();
+                if (!kivetelek.Contains(blobEldobjaAzEgeret)) blobEldobjaAzEgeret.Stop();
+            } else
+            {
+                blobTimer.Stop();
+                blobEszik.Stop();
+                blobBok.Stop();
+                blobSetal.Stop();
+                idleAnimation.Stop();
+                blobKovetiAzEgeret.Stop();
+                blobViszik.Stop();
+                blobSzarik.Stop();
+                blobEldobjaAzEgeret.Stop();
+            }
         }
 
         private void EgerLockIn_Tick(object sender, EventArgs e)
@@ -217,13 +283,29 @@ namespace blob.Classok
 
             if (szamlalo == 200)
             {
-                idleAnimation.Start();
-                kezLevagas();
-                elkaptaE = false;
-                egerLockIn.Stop();
-                main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
-                blobTimer.Start();
-                blobKovetiAzEgeret.Stop();
+                if (rnd.Next(0, 2) == 0 && elkaptaE)
+                {
+                    kezLevagas();
+                    szamlalo = 0;
+                    szamlaloKetto = 0;
+                    StopAnimaciok();
+                    blobEldobjaAzEgeret.Start();
+                    egerLockIn.Stop();
+                    elkaptaE = false;
+                } else
+                {
+                    szamlalo = 0;
+                    szamlaloKetto = 0;
+                    StopAnimaciok();
+                    idleAnimation.Start();
+                    kezLevagas();
+                    elkaptaE = false;
+                    egerLockIn.Stop();
+                    main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                    blobTimer.Start();
+                    blobKovetiAzEgeret.Stop();
+                }
+
             }
 
         }
@@ -501,8 +583,8 @@ namespace blob.Classok
                             else balKez = new hand("hand-jobb", -1, this.main, -75, 120);
                             jobbKez.Show();
                             //--kez
+                            StopAnimaciok();
                             blobKovetiAzEgeret.Start();
-                            StopAnimaciok(new[] { blobKovetiAzEgeret });
                         }
 
                         break;
@@ -579,6 +661,30 @@ namespace blob.Classok
                         balKez.Left = main.Left-5;
                         balKez.Top = main.Top + 100;
                         balKez.Show();
+
+                        break;
+                    case 8://teszt hogy megnézzem meg tudom e csinálni azt hogy elkurja a picsaba az egeret xd
+
+
+                        //idleAnimation.Stop();
+                        StopAnimaciok();
+                        kezLevagas();
+                        blobEldobjaAzEgeret.Start();
+                        /*
+                        balKez = new hand("mutat-bal", 3, this.main, 25, 95);
+                        jobbKez = new hand("okol-bal", 3, this.main, -120, 47);
+                        balKez.Show();
+                        jobbKez.Show();
+                        */
+
+                        /*
+                        balKez = new hand("hand-bal", 3, this.main, 22, 40);
+                        jobbKez = new hand("handdown-bal", 3, this.main, -100, 110);
+                        balKez.Show();
+                        jobbKez.Show();
+                        */
+
+
 
                         break;
                     default:
