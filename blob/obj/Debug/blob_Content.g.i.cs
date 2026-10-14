@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/okol-bal.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/kezek/okol-jobb.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/basic/meglepodott_inverted.png")]
 
 

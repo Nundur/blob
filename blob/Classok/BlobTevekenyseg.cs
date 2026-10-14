@@ -133,40 +133,68 @@ namespace blob.Classok
         public int blobDobAnimation = 0;
         public int szamlaloKetto = 0;
 
+        merre merreDob = merre.jobbra;
         private void BlobEldobjaAzEgeret_Tick(object sender, EventArgs e)
         {
             szamlalo++;
-
-            // 1. Fázis: Induláskor (szamlalo == 1)
             if (szamlalo == 1)
             {
+                if (merreDob == merre.balra)
+                {
+                    main.blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott.png")));
+                    blobDobAnimation = 1;
+                    kezLevagas();
+                    balKez = new hand("mutat-bal", -1, this.main, 25, 95);
+                    jobbKez = new hand("okol-bal", -1, this.main, -120, 47);
+                    balKez.Show();
+                    jobbKez.Show();
+                } else
+                {
+                    main.blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott-inverted.png")));
+                    blobDobAnimation = 1;
+                    kezLevagas();
+                    balKez = new hand("mutat-jobb", -1, this.main, -25-100, 95);
+                    jobbKez = new hand("okol-jobb", -1, this.main, 120 - 100, 47);
+                    balKez.Show();
+                    jobbKez.Show();
+                }
+                
+            }
+            if(szamlalo >= 1 && szamlalo < 50) SetCursorPos(Convert.ToInt32(main.Left +122), Convert.ToInt32(main.Top + 47));
 
-                main.blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott.png")));
-                blobDobAnimation = 1;
-                kezLevagas();
-                balKez = new hand("mutat-bal", -1, this.main, 25, 95);
-                jobbKez = new hand("okol-bal", -1, this.main, -120, 47);
-                balKez.Show();
-                jobbKez.Show();
-            }
-            if(szamlalo >= 1 && szamlalo < 70) SetCursorPos(Convert.ToInt32(main.Left +122), Convert.ToInt32(main.Top + 47));
-            // 2. Fázis: Bizonyos idő elteltével (pl. 150 tick / vagy ha stopperrel nézed)
-            else if (szamlalo == 70) // vagy amennyi tick a várakozási időd
+            else if (szamlalo == 50) // vagy amennyi tick a várakozási időd
             {
-                blobDobAnimation = 2;
-                kezLevagas();
-                balKez = new hand("hand-bal", -1, this.main, 22, 40);
-                jobbKez = new hand("handdown-bal", -1, this.main, -100, 110);
-                balKez.Show();
-                jobbKez.Show();
+                if (merreDob == merre.balra)
+                {
+                    blobDobAnimation = 2;
+                    kezLevagas();
+                    balKez = new hand("hand-bal", -1, this.main, 22, 40);
+                    jobbKez = new hand("handdown-bal", -1, this.main, -100, 110);
+                    balKez.Show();
+                    jobbKez.Show();
+                } else
+                {
+                    blobDobAnimation = 2;
+                    kezLevagas();
+                    balKez = new hand("hand-jobb", -1, this.main, -22-150, 40);
+                    jobbKez = new hand("handdown-jobb", -1, this.main, 100-150, 110);
+                    balKez.Show();
+                    jobbKez.Show();
+                }
             }
-            if (szamlalo>= 70)
+            if (szamlalo>= 50)
             {
-                szamlaloKetto+=45;
-                var pos = System.Windows.Forms.Cursor.Position;
-                SetCursorPos(Convert.ToInt32(main.Left + 22-szamlaloKetto), Convert.ToInt32(main.Top + 40));
+                szamlaloKetto += 45;
+                if (merreDob == merre.balra)
+                {
+                    SetCursorPos(Convert.ToInt32(main.Left + 22 - szamlaloKetto), Convert.ToInt32(main.Top + 40 - (szamlaloKetto / 4)));
+                } else
+                {
+                    SetCursorPos(Convert.ToInt32(main.Left + 22 + szamlaloKetto), Convert.ToInt32(main.Top + 40 - (szamlaloKetto / 4)));
+                }
+                
             }
-            if (szamlalo == 120)
+            if (szamlalo == 100)
             {
                 main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
                 blobEldobjaAzEgeret.Stop();
@@ -224,41 +252,14 @@ namespace blob.Classok
                 blobCsinalEValamit = true;
 
                 meddigMegyBlobStart++;
-
-                BitmapImage handBal = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
-                BitmapImage handJobb = new BitmapImage(new Uri(Pic("basic/kezek/hand-bal.png")));
                 if (main.Left + 75 >= pos.X)
                 {
-                    if (elkaptaE == false)
-                    {
-                        try
-                        {
-                            if (balKez.kez_kep.Source != handBal) balKez.kez_kep.Source = handBal;
-                            if (jobbKez.kez_kep.Source != handBal) jobbKez.kez_kep.Source = handBal;
-                        }
-                        catch (Exception)
-                        {
-                        }
-                    }
                     main.Left -= 10;
                     if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal1.png")));
                     else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal2.png")));
                 }
                 else
                 {
-                    if (elkaptaE == false)
-                    {
-                        try
-                        {
-                            if (balKez.kez_kep.Source != handJobb) balKez.kez_kep.Source = handJobb;
-                            if (jobbKez.kez_kep.Source != handJobb) jobbKez.kez_kep.Source = handJobb;
-                        }
-                        catch (Exception)
-                        {
-                        }
-                        
-                    }
-                    
                     main.Left += 10;
                     if (meddigMegyBlobStart % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal3.png")));
                     else main.blob.Source = new BitmapImage(new Uri(Pic("basic/setal/setal4.png")));
@@ -269,14 +270,14 @@ namespace blob.Classok
             }
             else
             {
-                if (jobbKez != null)
+                if (balKez == null)
                 {
                     kezLevagas();
                     balKez = new hand("interlock", -1, this.main, -55, 110);
                     balKez.Show();
                 }
                 main.blob.Source = new BitmapImage(new Uri(Pic("basic/mosoly/mosoly1.png")));
-                if (balKez != null) balKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/interlock.png")));
+                //if (balKez != null) balKez.kez_kep.Source = new BitmapImage(new Uri(Pic("basic/kezek/interlock.png")));
                 
             }
             szamlalo++;
@@ -289,9 +290,9 @@ namespace blob.Classok
                     szamlalo = 0;
                     szamlaloKetto = 0;
                     StopAnimaciok();
-                    blobEldobjaAzEgeret.Start();
                     egerLockIn.Stop();
                     elkaptaE = false;
+                    blobEldobjaAzEgeret.Start();
                 } else
                 {
                     szamlalo = 0;
@@ -575,13 +576,14 @@ namespace blob.Classok
                         {
                             szamlalo = 0;
                             kezLevagas();
+                            merreDob = rnd.Next(0, 2)==0 ? merre.balra : merre.jobbra;
                             //--kez
-                            if (blobErreMegy == merre.balra) balKez = new hand("hand-bal", -1, this.main, -75, 120);
-                            else balKez = balKez = new hand("hand-jobb", -1, this.main, -75, 120);
-                            balKez.Show();
-                            if (blobErreMegy == merre.balra) jobbKez = new hand("hand-bal", -1, this.main, 0, 115);
-                            else balKez = new hand("hand-jobb", -1, this.main, -75, 120);
-                            jobbKez.Show();
+                            //if (blobErreMegy == merre.balra) balKez = new hand("hand-bal", -1, this.main, -75, 120);
+                            //else balKez = balKez = new hand("hand-jobb", -1, this.main, -75, 120);
+                            //balKez.Show();
+                            //if (blobErreMegy == merre.balra) jobbKez = new hand("hand-bal", -1, this.main, 0, 115);
+                            //else balKez = new hand("hand-jobb", -1, this.main, -75, 120);
+                            //jobbKez.Show();
                             //--kez
                             StopAnimaciok();
                             blobKovetiAzEgeret.Start();
@@ -657,7 +659,7 @@ namespace blob.Classok
                     case 7: //kézzel bemutat :
 
                         
-                        balKez = new hand( rnd.Next(0, 2) ==0 ?  "middle-bal" : "like-bal", 1, this.main, -5, 100);
+                        balKez = new hand( rnd.Next(0, 2) ==0 ?  "middle-bal" : ((blobErreMegy == merre.balra)? "like-bal" : "like-jobb"), 1, this.main, -5, 100);
                         balKez.Left = main.Left-5;
                         balKez.Top = main.Top + 100;
                         balKez.Show();
@@ -670,22 +672,6 @@ namespace blob.Classok
                         StopAnimaciok();
                         kezLevagas();
                         blobEldobjaAzEgeret.Start();
-                        /*
-                        balKez = new hand("mutat-bal", 3, this.main, 25, 95);
-                        jobbKez = new hand("okol-bal", 3, this.main, -120, 47);
-                        balKez.Show();
-                        jobbKez.Show();
-                        */
-
-                        /*
-                        balKez = new hand("hand-bal", 3, this.main, 22, 40);
-                        jobbKez = new hand("handdown-bal", 3, this.main, -100, 110);
-                        balKez.Show();
-                        jobbKez.Show();
-                        */
-
-
-
                         break;
                     default:
                         break;
@@ -717,18 +703,13 @@ namespace blob.Classok
             if (!(main.Left + 10 >= maxLeft))
             {
                 main.Left += 10;
+                if (rnd.Next(0, 2) == 0) main.Top += 10;
+                else main.Top -= 10;
             }
             else
             {
-                if (!(main.Top + 10 >= maxTop))
-                {
-                    main.Top += 10;
-                }
-                else
-                {
-                    main.Top -= 10;
-                }
-
+                if (!(main.Top + 10 >= maxTop)) main.Top += 10;
+                else main.Top -= 10;
             }
             blobBokInt++;
             if (blobBokInt == 10)
@@ -742,7 +723,6 @@ namespace blob.Classok
         {
             if (idleAM == 0)
             {
-                //if (main.Left >= workingArea.Width / 2)
                 if (blobErreMegy == merre.balra) main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
                 else main.blob.Source = new BitmapImage(new Uri("pack://application:,,,/images/basic/van3.png"));
                 idleAM = 1;

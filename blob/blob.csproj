@@ -188,5 +188,8 @@
     <Resource Include="images\basic\kezek\okol-bal.png" />
     <Resource Include="images\basic\kezek\okol-jobb.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\basic\meglepodott-inverted.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

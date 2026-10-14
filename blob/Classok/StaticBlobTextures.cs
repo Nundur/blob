@@ -147,7 +147,24 @@ namespace blob.Classok
             "megloptam a böngésződ ramját",
             "feláll a cpu-d tól",
             "ha csak a cpu-dra gonolok... feláll",
-            "hiba volt megnyitnod..."
+            "hiba volt megnyitnod...",
+            "ha nem vagy elég óvatos, teleszarom a képernyőd",
+            "tele fogom szarni a képernyőd",
+            "engem nem lehet csak úgy kikapcsolni",
+            "el tudom dobni az egeredet",
+            "szeretek labdázni az egereddel",
+            "nem vagy nagyon beszédes..",
+            "ma nem vagy annyira beszédes",
+            "nem nagyon beszélsz",
+            "jöttem segíteni",
+            "kell segítség?",
+            "nem szeretem ha megfogsz",
+            "majd lepődj meg!",
+            "nagyon kell sz*rnom xd",
+            "szeretnék közelebb kerülni hozzád",
+            "szereték közelebb lenni hozzád",
+            "szeretnék közelebb kerülni a cpu-d hoz",
+            "érdekel a cpu-d"
 
 
 
