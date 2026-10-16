@@ -12,6 +12,7 @@
 
     <Grid>
         <Image x:Name="blob" Source="images/basic/van.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        <!--<TextBlock Text="asd" Foreground="White" Name="szoveg"/>-->
         <ListView Opacity="0.0" Name="jobbKlikList" AllowDrop="True" Drop="Blob_Drop">
             <ListView.ContextMenu>
                 <ContextMenu>

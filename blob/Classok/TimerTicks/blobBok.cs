@@ -26,25 +26,51 @@ namespace blob.Classok
                 else SetCursorPos(pos.X, pos.Y - 100);
 
             }*/
-
-
-            if (!(main.Left + 10 >= maxLeft))
+            int v = 8;
+            if (merrolJonBeAzEger == merre.balra)//balra
             {
-                main.Left += 10;
-                if (rnd.Next(0, 2) == 0) main.Top += 10;
-                else main.Top -= 10;
+                if (!(main.Left + v >= maxLeft))
+                {
+                    main.Left += v;
+                    if (rnd.Next(0, 2) == 0) main.Top += v;
+                    else main.Top -= v;
+                }
+                else
+                {
+                    if (!(main.Top + v >= maxTop)) main.Top += v;
+                    else main.Top -= v;
+                }
+                blobBokInt++;
             }
-            else
+            else if (merrolJonBeAzEger == merre.jobbra) // jobbra
             {
-                if (!(main.Top + 10 >= maxTop)) main.Top += 10;
-                else main.Top -= 10;
+                if (main.Left - v >= 0)
+                {
+                    main.Left -= v;
+
+                    if (rnd.Next(0, 2) == 0)
+                        main.Top += v;
+                    else
+                        main.Top -= v;
+                }
+                else
+                {
+                    if (main.Top + v < maxTop)
+                        main.Top += v;
+                    else
+                        main.Top -= v;
+                }
+
+                blobBokInt++;
+
             }
-            blobBokInt++;
-            if (blobBokInt == 10)
+
+            if (blobBokInt >= 20)
             {
                 blobBokInt = 0;
                 blobBok.Stop();
             }
+
         }
 
 

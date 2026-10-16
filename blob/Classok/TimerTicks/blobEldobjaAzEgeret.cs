@@ -75,6 +75,7 @@ namespace blob.Classok
             }
             if (szamlalo == 100)
             {
+                blobCsinalEValamit = false;
                 main.blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
                 blobEldobjaAzEgeret.Stop();
                 kezLevagas();

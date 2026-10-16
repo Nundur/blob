@@ -34,6 +34,42 @@ namespace blob.Classok
         public static string van4 { get; set; } = "pack://application:,,,/images/szardarab/szardarab2.png";
         public static string ablakBuborek { get; set; } = "pack://application:,,,/images/szardarab/szardarab2.png";
         */
+        public static string[] blobNemAkarjaEldobjak = { 
+        "hallod ne dobálj már",
+        "mit dobálsz amúgy?",
+        "miért dobálsz?",
+        "miért dobálsz amúgy?",
+        "amúgy mit dobálsz?",
+        "amúgy miért dobálsz?",
+        "van oké hogy ide oda dobsz?",
+        "ne dobogassá engem sehova",
+        "hallod, el fogok szédülni",
+        "ÁUUUU",
+        "ÁÁÁÁUHHHHG",
+        "ÁÁÁUHG",
+        "UUHGHGF",
+        "UHHHH",
+        "ÁU EMBER",
+        "EMBER NE DOBÁLJ MÁR",
+        "HAGYD MÁR ABBA",
+        "HAGYJAD MÁR ABBA",
+        "NE DOBÁLJ!",
+        "HALO NE DOBÁLJ",
+        "halo ne dobalj már",
+        "ÁUUUUUUHHHH",
+        "ÁÁÁÁ EZ FÁJT",
+        "ez kifejezetten fájt, ne dobálj",
+        "ezt hagyd abba",
+        "ha megint eldobsz..",
+        "utolsó figyelmeztetés, ne dobálj",
+        "ez nem esett jól",
+        "ez nagyon nem volt jó",
+        "ÁÁÁHHGHGGHFFHGGFFFFF",
+        "áucs",
+        "aucs"
+        
+        };
+
         public static string[] blobNemAkarBezarodni = {
             "nem",
             "nem akarok meghalni",

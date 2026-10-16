@@ -71,6 +71,9 @@ namespace blob.Classok
         public static hand jobbKez = null;
 
         private MainWindow main;
+        public static merre merrolJonBeAzEger;
+
+        public DispatcherTimer blobotEldobjak = new DispatcherTimer();
 
         public BlobTevekenysegek(MainWindow mainWindow) //konstruktor
         {
@@ -120,7 +123,14 @@ namespace blob.Classok
             //blobEldobjaAzEgeret
             blobEldobjaAzEgeret.Interval = TimeSpan.FromMilliseconds(1);
             blobEldobjaAzEgeret.Tick += BlobEldobjaAzEgeret_Tick;
+
+            //blobotEldobjak
+            blobotEldobjak.Interval = TimeSpan.FromMilliseconds(1);
+            blobotEldobjak.Tick += blobotEldobjak_Tick;
+
         }
+
+        
 
         public int blobDobAnimation = 0;
         public int szamlaloKetto = 0;
@@ -139,6 +149,7 @@ namespace blob.Classok
                 if (!kivetelek.Contains(blobViszik)) blobViszik.Stop();
                 if (!kivetelek.Contains(blobSzarik)) blobSzarik.Stop();
                 if (!kivetelek.Contains(blobEldobjaAzEgeret)) blobEldobjaAzEgeret.Stop();
+                if (!kivetelek.Contains(blobotEldobjak)) blobotEldobjak.Stop();
             } else
             {
                 blobTimer.Stop();
@@ -150,6 +161,7 @@ namespace blob.Classok
                 blobViszik.Stop();
                 blobSzarik.Stop();
                 blobEldobjaAzEgeret.Stop();
+                blobotEldobjak.Stop();
             }
         }
         public void kezLevagas()
@@ -258,6 +270,7 @@ namespace blob.Classok
                     case 5:
                         if (!blobKovetiAzEgeret.IsEnabled)
                         {
+                            blobCsinalEValamit = true;
                             szamlalo = 0;
                             kezLevagas();
                             merreDob = rnd.Next(0, 2)==0 ? merre.balra : merre.jobbra;

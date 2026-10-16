@@ -72,6 +72,7 @@ namespace blob.Classok
                 }
                 else
                 {
+                    blobCsinalEValamit = false;
                     szamlalo = 0;
                     szamlaloKetto = 0;
                     StopAnimaciok();

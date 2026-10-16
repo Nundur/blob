@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,25 +11,23 @@ namespace blob.Classok
 {
     public partial class BlobTevekenysegek
     {
-
+        int Xeger= System.Windows.Forms.Cursor.Position.X;
+        public static int difference = 0;
         private void BlobViszik_Tick(object sender, EventArgs e)
         {
+            
+            
+            //main.szoveg.Text = $"{difference}";
 
             blobotViszikInt++;
-            kezLevagas();
-            StopAnimaciok(new[] { blobViszik });
-            /*
-            if (blobTimer.IsEnabled) blobTimer.Stop();
-            if (blobEszik.IsEnabled) blobEszik.Stop();
-            if (blobBok.IsEnabled) blobBok.Stop();
-            if (blobSetal.IsEnabled) blobSetal.Stop();
-            if (idleAnimation.IsEnabled) idleAnimation.Stop();
-            if (blobKovetiAzEgeret.IsEnabled) blobKovetiAzEgeret.Stop();
-            */
+            
 
             var pos = System.Windows.Forms.Cursor.Position;
             int x = pos.X;
             int y = pos.Y;
+
+            difference = Xeger - x;
+            Xeger = System.Windows.Forms.Cursor.Position.X;
 
             if (blobotViszikInt % 2 == 0) main.blob.Source = new BitmapImage(new Uri(Pic("basic/repul/repul1.png")));
             else main.blob.Source = new BitmapImage(new Uri(Pic("basic/repul/repul2.png")));

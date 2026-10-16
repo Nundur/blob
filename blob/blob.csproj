@@ -62,6 +62,7 @@
     </ApplicationDefinition>
     <Compile Include="Classok\BlobTevekenyseg.cs" />
     <Compile Include="Classok\StaticBlobTextures.cs" />
+    <Compile Include="Classok\TimerTicks\blobotEldobjak.cs" />
     <Compile Include="Classok\TimerTicks\blobKovetiAzEgeret.cs" />
     <Compile Include="Classok\TimerTicks\blobEldobjaAzEgeret.cs" />
     <Compile Include="Classok\TimerTicks\egerLockIn.cs" />
@@ -199,6 +200,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\basic\meglepodott-inverted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\basic\blob-zuhan-balra.png" />
+    <Resource Include="images\basic\blob-zuhan-jobbra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\basic\blob-utkozik-balra.png" />
+    <Resource Include="images\basic\blob-utkozik-jobbra.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

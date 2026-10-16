@@ -22,7 +22,7 @@ namespace blob
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    enum merre { balra, jobbra, fel, le }
+    public enum merre { balra, jobbra, fel, le }
     public partial class MainWindow : Window
     {
 
@@ -68,17 +68,42 @@ namespace blob
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            blobTimers.blobCsinalEValamit = false;
-            blobTimers.idleAnimation.Start();
-            blobTimers.blobViszik.Stop();
-            blobTimers.blobTimer.Start();
+
+            Mouse.Capture(null);
+
+            if (Math.Abs(difference) >=50)
+            {
+                if (difference > 0)
+                {
+                    blob.Source = new BitmapImage(new Uri(Pic("basic/blob-zuhan-balra.png")));
+                } else if (difference < 0)
+                {
+
+                    blob.Source = new BitmapImage(new Uri(Pic("basic/blob-zuhan-jobbra.png")));
+                }
+                blobTimers.StopAnimaciok();
+                blobTimers.blobotEldobjak.Start();
+            } else {
+                blobTimers.blobCsinalEValamit = false;
+                blobTimers.idleAnimation.Start();
+                blobTimers.blobViszik.Stop();
+                blobTimers.blobTimer.Start();
+            }
+            
         }
 
         private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
-            blobTimers.blobViszik.Start();
-            blobTimers.blobCsinalEValamit = true;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Mouse.Capture(this);
+                blob.Source = new BitmapImage(new Uri(Pic("basic/van.png")));
+                blobTimers.StopAnimaciok();
+                blobTimers.kezLevagas();
+                blobTimers.blobViszik.Start();
+                blobTimers.blobCsinalEValamit = true;
+            }
+                
         }
 
 
@@ -107,7 +132,17 @@ namespace blob
 
                 if (!(I.blobTimers.blobCsinalEValamit))
                 {
-                    blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott.png")));
+                    if (dx < 0)
+                    {
+                        blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott-inverted.png")));
+                        merrolJonBeAzEger = merre.jobbra;
+
+                    } else if (dx > 0)
+                    {
+                        blob.Source = new BitmapImage(new Uri(Pic("basic/meglepodott.png")));
+                        merrolJonBeAzEger = merre.balra;
+                    }
+                    
                     blobTimers.blobBok.Start();
                 }
             }
