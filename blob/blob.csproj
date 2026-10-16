@@ -62,6 +62,15 @@
     </ApplicationDefinition>
     <Compile Include="Classok\BlobTevekenyseg.cs" />
     <Compile Include="Classok\StaticBlobTextures.cs" />
+    <Compile Include="Classok\TimerTicks\blobKovetiAzEgeret.cs" />
+    <Compile Include="Classok\TimerTicks\blobEldobjaAzEgeret.cs" />
+    <Compile Include="Classok\TimerTicks\egerLockIn.cs" />
+    <Compile Include="Classok\TimerTicks\blobSzarik.cs" />
+    <Compile Include="Classok\TimerTicks\blobViszik.cs" />
+    <Compile Include="Classok\TimerTicks\BlobEszik.cs" />
+    <Compile Include="Classok\TimerTicks\blobBok.cs" />
+    <Compile Include="Classok\TimerTicks\BlobSetal.cs" />
+    <Compile Include="Classok\TimerTicks\IdleAnimation.cs" />
     <Compile Include="hand.xaml.cs">
       <DependentUpon>hand.xaml</DependentUpon>
     </Compile>

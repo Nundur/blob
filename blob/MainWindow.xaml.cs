@@ -81,8 +81,22 @@ namespace blob
             blobTimers.blobCsinalEValamit = true;
         }
 
+
+        private Point elozoPozicio;
         private void MainWindow_MouseEnter(object sender, MouseEventArgs e)
         {
+            Point aktualisPozicio = e.GetPosition(this);
+
+            double dx = aktualisPozicio.X - elozoPozicio.X;
+            double dy = aktualisPozicio.Y - elozoPozicio.Y;
+
+            elozoPozicio = aktualisPozicio;
+
+            //dx < 0: az egér balra mozog.
+            //dx > 0: az egér jobbra mozog.
+
+
+
             //blobTimers.blobTolerancia++;
             if (!blobTimers.blobKovetiAzEgeret.IsEnabled)
             {
