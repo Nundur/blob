@@ -209,5 +209,8 @@
     <Resource Include="images\basic\blob-utkozik-balra.png" />
     <Resource Include="images\basic\blob-utkozik-jobbra.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\basic\blobUlKetto.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

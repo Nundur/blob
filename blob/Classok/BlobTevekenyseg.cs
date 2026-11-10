@@ -34,6 +34,8 @@ namespace blob.Classok
 
         public DispatcherTimer blobSetal = new DispatcherTimer();
 
+        public DispatcherTimer blobUlAnimacio = new DispatcherTimer();
+
         System.Windows.Rect workingArea = SystemParameters.WorkArea;
         int blobBokInt = 0;
 
@@ -128,9 +130,24 @@ namespace blob.Classok
             blobotEldobjak.Interval = TimeSpan.FromMilliseconds(1);
             blobotEldobjak.Tick += blobotEldobjak_Tick;
 
-        }
+            //blobUlAnimacio mikozben ul
+            blobUlAnimacio.Interval = TimeSpan.FromMilliseconds(500);
+            blobUlAnimacio.Tick += BlobUlAnimacio_Tick;
 
-        
+        }
+        public static bool blobUlAnimacio_szamlalo = true;
+        private void BlobUlAnimacio_Tick(object sender, EventArgs e)
+        {
+            if (blobUlAnimacio_szamlalo == true)
+            {
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/blobUlKetto.png")));
+                blobUlAnimacio_szamlalo = false;
+            } else
+            {
+                main.blob.Source = new BitmapImage(new Uri(Pic("basic/blobUl.png")));
+                blobUlAnimacio_szamlalo = true;
+            }
+        }
 
         public int blobDobAnimation = 0;
         public int szamlaloKetto = 0;
@@ -150,6 +167,7 @@ namespace blob.Classok
                 if (!kivetelek.Contains(blobSzarik)) blobSzarik.Stop();
                 if (!kivetelek.Contains(blobEldobjaAzEgeret)) blobEldobjaAzEgeret.Stop();
                 if (!kivetelek.Contains(blobotEldobjak)) blobotEldobjak.Stop();
+                if (!kivetelek.Contains(blobUlAnimacio)) blobUlAnimacio.Stop();
             } else
             {
                 blobTimer.Stop();
@@ -162,6 +180,7 @@ namespace blob.Classok
                 blobSzarik.Stop();
                 blobEldobjaAzEgeret.Stop();
                 blobotEldobjak.Stop();
+                blobUlAnimacio.Stop();
             }
         }
         public void kezLevagas()

@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\classok\\timerticks\\blobkovetiazegeret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\classok\\timerticks\\blobkovetiazegeret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\classok\\timerticks\\blobeldobjaazegeret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\classok\\timerticks\\blobeldobjaazegeret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\classok\\timerticks\\bloboteldobjak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\classok\\timerticks\\bloboteldobjak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\classok\\blobtevekenyseg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\classok\\blobtevekenyseg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|c:\\users\\asus\\desktop\\blob\\blob\\blob\\hand.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C53C4C8F-4ABA-4CBA-9289-FCFC0A48F507}|blob\\blob.csproj|solutionrelative:blob\\hand.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +35,65 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "blobKovetiAzEgeret.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobKovetiAzEgeret.cs",
-              "RelativeDocumentMoniker": "blob\\Classok\\TimerTicks\\blobKovetiAzEgeret.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobKovetiAzEgeret.cs",
-              "RelativeToolTip": "blob\\Classok\\TimerTicks\\blobKovetiAzEgeret.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAgwDMAAAA0AAAAAAAAAA==",
+              "Title": "blobotEldobjak.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobotEldobjak.cs",
+              "RelativeDocumentMoniker": "blob\\Classok\\TimerTicks\\blobotEldobjak.cs",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobotEldobjak.cs",
+              "RelativeToolTip": "blob\\Classok\\TimerTicks\\blobotEldobjak.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-14T11:23:22.461Z",
+              "WhenOpened": "2026-10-16T22:02:13.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "blob\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\MainWindow.xaml",
+              "RelativeToolTip": "blob\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-11-10T11:48:47.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "hand.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\hand.xaml.cs",
+              "RelativeDocumentMoniker": "blob\\hand.xaml.cs",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\hand.xaml.cs",
+              "RelativeToolTip": "blob\\hand.xaml.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T11:30:53.805Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "blobEldobjaAzEgeret.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobEldobjaAzEgeret.cs",
-              "RelativeDocumentMoniker": "blob\\Classok\\TimerTicks\\blobEldobjaAzEgeret.cs",
-              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\TimerTicks\\blobEldobjaAzEgeret.cs",
-              "RelativeToolTip": "blob\\Classok\\TimerTicks\\blobEldobjaAzEgeret.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAgwBsAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-14T11:20:14.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "BlobTevekenyseg.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\BlobTevekenyseg.cs",
               "RelativeDocumentMoniker": "blob\\Classok\\BlobTevekenyseg.cs",
               "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\Classok\\BlobTevekenyseg.cs",
               "RelativeToolTip": "blob\\Classok\\BlobTevekenyseg.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAQwFIAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAhwH4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-14T11:02:06.241Z",
+              "WhenOpened": "2026-11-10T11:27:19.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "blob\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ASUS\\Desktop\\blob\\blob\\blob\\MainWindow.xaml.cs",
+              "RelativeToolTip": "blob\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAcwHgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T11:27:31.651Z",
               "EditorCaption": ""
             }
           ]

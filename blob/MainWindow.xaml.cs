@@ -180,14 +180,18 @@ namespace blob
         {
             if (blobTimers.blobUl == false)
             {
+                blobTimers.StopAnimaciok();
+
                 blobTimers.blobCsinalEValamit = true;
                 blobTimers.blobTimer.Stop();
                 blobTimers.idleAnimation.Stop();
                 blob.Source = new BitmapImage(new Uri(Pic("basic/blobUl.png")));
+                blobTimers.blobUlAnimacio.Start();
             }
             else
             {
                 blobTimers.blobCsinalEValamit = false;
+                blobTimers.blobUlAnimacio.Stop();
                 blobTimers.blobTimer.Start();
                 blobTimers.idleAnimation.Start();
             }

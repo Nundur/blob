@@ -27,7 +27,7 @@ namespace blob.Classok
                     blobotEldobjak.Stop();
                     idleAnimation.Start();
                     blobTimer.Start();
-                    if (rnd.Next(0, 2) == 0)
+                    if (rnd.Next(0, 5) == 0)
                     {
                         buborek bubi = new buborek(blobNemAkarjaEldobjak[rnd.Next(0, blobNemAkarjaEldobjak.Length - 1)]);
                         bubi.Left = main.Left - 250;

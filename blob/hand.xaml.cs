@@ -54,6 +54,14 @@ namespace blob
             alapKezTimer.Interval = TimeSpan.FromMilliseconds(1);
             alapKezTimer.Tick += alapKezTimer_Tick;
             alapKezTimer.Start();
+
+            this.Closing += Hand_Closing;
+        }
+
+        private void Hand_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            hideing.Stop();
+            alapKezTimer.Stop();
         }
 
         private void alapKezTimer_Tick(object sender, EventArgs e)
@@ -70,8 +78,9 @@ namespace blob
                 
             } else
             {
-                this.Close();
                 hideing.Stop();
+                alapKezTimer.Stop();
+                this.Close();
             }
         }
     }
